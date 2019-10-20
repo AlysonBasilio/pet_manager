@@ -14,6 +14,10 @@ class Owner < ApplicationRecord
     pets.sum(:monthly_cost)
   end
 
+  def three_month_cost
+    current_spent * 3
+  end
+
   def age
     ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor
   end

@@ -1,0 +1,35 @@
+<div>
+  <strong>Qual é o custo médio dos animais do tipo cachorro?</strong>
+  <br><strong>Query: </strong><span>Pet.where(kind: 'Cachorro').average(:monthly_cost)</span>
+  <br><strong>Resposta: </strong><span><%= Pet.where(kind: 'Cachorro').average(:monthly_cost) %></span>
+</div>
+<br>
+<div>
+  <strong>Quantos cachorros existem no sistema?</strong>
+  <br><strong>Query: </strong><span>Pet.where(kind: 'Cachorro').count</span>
+  <br><strong>Resposta: </strong><span><%= Pet.where(kind: 'Cachorro').count %></span>
+</div>
+<br>
+<div>
+  <strong>Qual o nome dos donos dos cachorros (Array de nomes)</strong>
+  <br><strong>Query: </strong><span>Pet.includes(:owner).where(kind: 'Cachorro').map{ |pet| pet.owner.name }</span>
+  <br><strong>Resposta: </strong><span><%= Pet.includes(:owner).where(kind: 'Cachorro').map{ |pet| pet.owner.name } %></span>
+</div>
+<br>
+<div>
+  <strong>Retorne as pessoas ordenando pelo custo que elas tem com os animais (Maior para menor)</strong>
+  <br><strong>Query: </strong><span>Owner.all.sort_by { |owner| -owner.current_spent }</span>
+  <br><strong>Resposta: </strong>
+  <% Owner.all.sort_by { |owner| -owner.current_spent }.each do |owner| %>
+    <br><%= "#{owner.name}: #{owner.current_spent}" %>  
+  <% end %>
+</div>
+<br>
+<div>
+  <strong>Levando em consideração o custo mensal, qual será o custo de 3 meses de cada pessoa?</strong>
+  <br><strong>Query: </strong><span>Owner.all.map { |owner| owner.three_month_cost }</span>
+  <br><strong>Resposta: </strong>
+  <% Owner.all.each do |owner| %>
+    <br><%= "#{owner.name}: #{owner.three_month_cost}" %>  
+  <% end %>
+</div>
