@@ -19,7 +19,7 @@ class Pet < ApplicationRecord
   end
   
   def owner_cant_have_pets_if_they_already_spend_more_than_1000
-    if owner.current_spent > 1000
+    if owner.present? && owner.current_spent > 1000
       errors.add(:owner_ir, "owner can't have one more pet if they already spend more than 1000")
     end
   end
