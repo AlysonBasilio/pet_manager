@@ -3,7 +3,7 @@ class CreatePets < ActiveRecord::Migration[6.0]
     create_table :pets do |t|
       t.string :name, null: false
       t.decimal :monthly_cost, null: false
-      t.string :type, null: false
+      t.string :kind, null: false
 
       t.integer :owner_id, null: false
 
